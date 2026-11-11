@@ -1,0 +1,4 @@
+{"procedures":{
+ "47.09":{"label":"Appendectomy","dx_prefixes":["K35","K36","K37"],"source":"designed for demo (ICD-9-CM code, simplified support list)","simplified":true},
+ "36.06":{"label":"Coronary stent insertion","dx_prefixes":["I20","I21","I22","I25"],"source":"designed for demo (ICD-9-CM code, simplified support list)","simplified":true}
+}}

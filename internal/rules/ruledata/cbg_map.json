@@ -1,0 +1,7 @@
+{"groups":{
+ "J-4-10-I":{"label":"Pneumonia","dx_prefixes":["J12","J13","J14","J15","J18"],"los_min":2,"los_max":8,"source":"designed for demo, not an official tariff table","simplified":true},
+ "K-4-10-I":{"label":"Appendicitis","dx_prefixes":["K35","K36","K37"],"los_min":1,"los_max":5,"source":"designed for demo, not an official tariff table","simplified":true},
+ "I-4-10-I":{"label":"Acute myocardial infarction","dx_prefixes":["I21","I22"],"los_min":2,"los_max":10,"source":"designed for demo, not an official tariff table","simplified":true},
+ "A-4-10-I":{"label":"Gastroenteritis","dx_prefixes":["A00","A01","A02","A03","A04","A08","A09"],"los_min":1,"los_max":5,"source":"designed for demo, not an official tariff table","simplified":true},
+ "E-4-10-I":{"label":"Diabetes mellitus","dx_prefixes":["E10","E11","E13","E14"],"los_min":2,"los_max":9,"source":"designed for demo, not an official tariff table","simplified":true}
+}}
