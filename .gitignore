@@ -5,3 +5,5 @@ web/dist/
 .env
 *.log
 .DS_Store
+.env.*
+!.env.example
