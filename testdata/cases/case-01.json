@@ -1,0 +1,6 @@
+{"id":"case-01","title":"Pneumonia, stay longer than the group allows","cbg_code":"J-4-10-I",
+"diagnoses":[{"code":"J18.9","primary":true},{"code":"J44.9","primary":false}],"procedures":[],
+"admit_date":"2026-02-03","discharge_date":"2026-02-17","care_class":2,
+"return_reason":"Pending: verifikasi lama rawat",
+"resume_text":"Pasien laki-laki 58 tahun masuk dengan demam dan sesak 5 hari. Rontgen toraks: infiltrat lobus kanan bawah. Didiagnosis pneumonia. Diberikan antibiotik intravena. Pada hari ke-9 kondisi memburuk karena komorbid PPOK sehingga perawatan diperpanjang. Pulang hari ke-14 dalam kondisi membaik.",
+"expected":["R-LOS"]}

@@ -1,0 +1,6 @@
+{"id":"case-03","title":"Heart attack grouped as gastroenteritis","cbg_code":"A-4-10-I",
+"diagnoses":[{"code":"I21.0","primary":true}],"procedures":[],
+"admit_date":"2026-04-02","discharge_date":"2026-04-07","care_class":1,
+"return_reason":"Pending: pengelompokan perlu ditinjau",
+"resume_text":"Pasien laki-laki 62 tahun nyeri dada tipikal 3 jam. EKG: ST elevasi V1-V4. Troponin meningkat. Diagnosis infark miokard akut anterior. Mendapat dual antiplatelet dan heparin. Dirawat 5 hari, pulang dalam kondisi stabil.",
+"expected":["R-PRIMARY-DX"]}

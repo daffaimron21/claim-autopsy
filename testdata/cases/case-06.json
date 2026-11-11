@@ -1,0 +1,6 @@
+{"id":"case-06","title":"Long stay that is really a wrong discharge date","cbg_code":"A-4-10-I",
+"diagnoses":[{"code":"A09","primary":true}],"procedures":[],
+"admit_date":"2026-07-01","discharge_date":"2026-07-10","care_class":2,
+"return_reason":"Pending: lama rawat melebihi batas",
+"resume_text":"Pasien laki-laki 31 tahun diare dan muntah 2 hari. Dirawat 3 hari dengan rehidrasi, pulang 4 Juli 2026 dalam kondisi baik.",
+"expected":["R-LOS","M-DATE-MISMATCH"]}
