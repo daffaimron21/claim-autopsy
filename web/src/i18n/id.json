@@ -1,0 +1,98 @@
+{
+  "app": {
+    "title": "Autopsi Klaim",
+    "tagline": "Cari tahu kenapa klaim BPJS dikembalikan.",
+    "synthetic": "Semua data sintetis. Aturan hanyalah subset sederhana untuk demo, bukan aturan resmi BPJS."
+  },
+  "locale": { "label": "Bahasa", "en": "EN", "id": "ID" },
+  "cases": { "heading": "Klaim yang dikembalikan", "loading": "Memuat klaim" },
+  "file": {
+    "heading": "Berkas kasus",
+    "cbg": "Grup INA-CBG",
+    "diagnoses": "Diagnosis",
+    "primary": "utama",
+    "procedures": "Tindakan",
+    "none": "Tidak ada",
+    "admit": "Tanggal masuk",
+    "discharge": "Tanggal pulang",
+    "careClass": "Kelas rawat",
+    "returnReason": "Alasan pengembalian BPJS",
+    "summary": "Resume medis",
+    "summaryNote": "Teks asli"
+  },
+  "autopsy": { "run": "Jalankan autopsi", "running": "Memeriksa klaim" },
+  "report": {
+    "heading": "Laporan autopsi",
+    "empty": "Pilih klaim yang dikembalikan, lalu jalankan autopsi.",
+    "primary": "Penyebab utama",
+    "secondary": "Penyebab lain",
+    "verdict": "Putusan",
+    "fix": "Saran perbaikan",
+    "evidence": "Bukti",
+    "degraded": "Model bahasa langsung tidak tersedia. Laporan ini memakai hasil model yang tersimpan.",
+    "noCause": "Tidak ada penyebab ditemukan. Klaim lolos semua pemeriksaan.",
+    "print": "Cetak atau simpan sebagai PDF"
+  },
+  "drawer": {
+    "show": "Kenapa temuan ini?",
+    "close": "Tutup",
+    "simplified": "Disederhanakan untuk demo. Bukan tarif atau aturan resmi BPJS.",
+    "deterministic": "Aturan deterministik. Masukan yang sama selalu memberi hasil yang sama.",
+    "modelNote": "Ditemukan oleh model bahasa. Kutipannya dicocokkan kata demi kata dengan resume."
+  },
+  "severity": { "minor": "Ringan", "major": "Berat", "blocking": "Menghambat" },
+  "source": { "rule": "Aturan", "resume": "Model" },
+  "verdict": {
+    "resubmit_as_is": "Bisa diajukan ulang apa adanya",
+    "resubmit_after_fix": "Ajukan ulang setelah diperbaiki",
+    "not_resubmittable": "Tidak bisa diajukan ulang"
+  },
+  "field": {
+    "diagnosis": "Diagnosis",
+    "procedure": "Tindakan",
+    "admit_date": "Tanggal masuk",
+    "discharge_date": "Tanggal pulang",
+    "cbg_code": "Kode INA-CBG",
+    "resume_text": "Resume medis"
+  },
+  "rule": {
+    "R_LOS": { "title": "Lama rawat sesuai rentang grup", "desc": "Menghitung hari antara masuk dan pulang, lalu membandingkannya dengan rentang yang diizinkan grup INA-CBG. Rawat sehari dihitung 1 hari." },
+    "R_DATES": { "title": "Tanggal masuk dan pulang valid", "desc": "Memeriksa bahwa kedua tanggal benar-benar tanggal dan tanggal pulang tidak lebih awal dari tanggal masuk." },
+    "R_PRIMARY_DX": { "title": "Diagnosis utama cocok dengan grup", "desc": "Memeriksa bahwa kode diagnosis utama termasuk diagnosis yang dicakup grup INA-CBG, dan bahwa kode grupnya dikenal." },
+    "R_PROC_SUPPORT": { "title": "Tindakan punya diagnosis pendukung", "desc": "Memeriksa bahwa tindakan yang dikodekan didukung minimal satu diagnosis pada klaim yang membenarkannya." },
+    "R_CODE_FORMAT": { "title": "Format kode", "desc": "Memeriksa bahwa kode diagnosis dan tindakan berbentuk seperti kode ICD-10 dan ICD-9-CM." },
+    "M_UNCODED_DX": { "title": "Diagnosis ada di resume tapi tidak dikodekan", "desc": "Model bahasa mencari diagnosis yang tertulis di resume medis tetapi tidak dikodekan pada klaim." },
+    "M_DATE_MISMATCH": { "title": "Resume berbeda soal tanggal", "desc": "Model bahasa mencari lama rawat atau tanggal pulang di resume yang berbeda dengan klaim." },
+    "M_PROC_MISSING": { "title": "Tindakan ada di resume tapi tidak dikodekan", "desc": "Model bahasa mencari tindakan yang dijelaskan di resume tetapi tidak dikodekan pada klaim." }
+  },
+  "finding": {
+    "dates": {
+      "inverted": "Tanggal pulang ({discharge}) lebih awal dari tanggal masuk ({admit}).",
+      "invalid": "Tanggal masuk atau tanggal pulang kosong atau bukan tanggal yang valid."
+    },
+    "los": { "out_of_range": "Lama rawat {los} hari, padahal grup {group} hanya memperbolehkan {min} sampai {max} hari." },
+    "cbg": { "unknown": "Kode INA-CBG {cbg} tidak ada di data aturan." },
+    "primary_dx": { "not_in_group": "Diagnosis utama {code} tidak termasuk grup {group} ({cbg})." },
+    "procedure": { "unsupported": "Tindakan {procedure} ({label}) tidak punya diagnosis pendukung pada klaim." },
+    "code": { "format": "Kode {code} tidak tampak seperti kode yang valid." },
+    "resume": {
+      "uncoded_dx": "Resume medis menyebut diagnosis yang tidak dikodekan pada klaim.",
+      "date_mismatch": "Resume medis berbeda dengan klaim soal lama rawat atau tanggal pulang.",
+      "proc_missing": "Resume medis menjelaskan tindakan yang tidak dikodekan pada klaim."
+    }
+  },
+  "fix": {
+    "correct_dates": "Perbaiki tanggal masuk dan pulang agar sesuai dengan rekam medis.",
+    "review_los_or_regroup": "Periksa lama rawat terhadap rekam medis. Kalau sudah benar, tambahkan justifikasi atau tinjau ulang grupnya.",
+    "regroup_cbg": "Kelompokkan ulang klaim berdasarkan diagnosis utamanya.",
+    "align_procedure_and_dx": "Samakan tindakan dan diagnosis: perbaiki kode tindakan atau tambahkan diagnosis pendukungnya.",
+    "correct_code": "Perbaiki kode supaya formatnya valid.",
+    "add_missing_dx": "Tambahkan kode diagnosis yang belum ada ke klaim.",
+    "code_missing_procedure": "Kodekan tindakan yang belum ada."
+  },
+  "error": {
+    "case_not_found": "Klaim itu tidak ditemukan.",
+    "autopsy_failed": "Autopsi tidak dapat diselesaikan. Silakan coba lagi.",
+    "network": "Tidak dapat menghubungi server. Silakan coba lagi."
+  }
+}
