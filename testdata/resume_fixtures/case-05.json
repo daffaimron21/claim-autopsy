@@ -1,0 +1,6 @@
+[
+  {"rule_id":"M-UNCODED-DX","source":"resume","severity":1,"message_key":"finding.resume.uncoded_dx",
+   "params":{"diagnosis":"acute kidney injury"},
+   "evidence":[{"field":"resume_text","quote":"diagnosis cedera ginjal akut ditegakkan"}],
+   "fix_key":"fix.add_missing_dx","fixable":true}
+]

@@ -1,0 +1,6 @@
+[
+  {"rule_id":"M-DATE-MISMATCH","source":"resume","severity":2,"message_key":"finding.resume.date_mismatch",
+   "params":{"resume_date":"2026-07-04","claim_date":"2026-07-10"},
+   "evidence":[{"field":"resume_text","quote":"pulang 4 Juli 2026"}],
+   "fix_key":"fix.correct_dates","fixable":true}
+]
