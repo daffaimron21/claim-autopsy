@@ -1,6 +1,40 @@
 [
-  {"rule_id":"M-DATE-MISMATCH","source":"resume","severity":2,"message_key":"finding.resume.date_mismatch",
-   "params":{"resume_date":"2026-07-04","claim_date":"2026-07-10"},
-   "evidence":[{"field":"resume_text","quote":"pulang 4 Juli 2026"}],
-   "fix_key":"fix.correct_dates","fixable":true}
+  {
+    "rule_id": "M-DATE-MISMATCH",
+    "source": "resume",
+    "severity": 2,
+    "message_key": "finding.resume.date_mismatch",
+    "params": {
+      "claim_admit_date": "2026-07-01",
+      "claim_discharge_date": "2026-07-10",
+      "claim_stay_days": "9",
+      "summary_stay_days": "3"
+    },
+    "evidence": [
+      {
+        "field": "resume_text",
+        "quote": "Dirawat 3 hari"
+      }
+    ],
+    "fix_key": "fix.correct_dates",
+    "fixable": true
+  },
+  {
+    "rule_id": "M-DATE-MISMATCH",
+    "source": "resume",
+    "severity": 2,
+    "message_key": "finding.resume.date_mismatch",
+    "params": {
+      "claim_discharge_date": "2026-07-10",
+      "summary_discharge_date": "2026-07-04"
+    },
+    "evidence": [
+      {
+        "field": "resume_text",
+        "quote": "pulang 4 Juli 2026"
+      }
+    ],
+    "fix_key": "fix.correct_dates",
+    "fixable": true
+  }
 ]

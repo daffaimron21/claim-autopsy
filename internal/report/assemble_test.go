@@ -73,3 +73,25 @@ func TestAssemble_PassesDegradedAndCaseID(t *testing.T) {
 		t.Fatalf("got %+v", r)
 	}
 }
+
+func TestAssemble_MergesResumeFindingsOfTheSameRule(t *testing.T) {
+	ev := func(q string) []claim.Evidence { return []claim.Evidence{{Field: "resume_text", Quote: q}} }
+	m1 := f("M-DATE-MISMATCH", claim.SourceResume, claim.SeverityBlocking, true)
+	m1.Evidence = ev("Dirawat 3 hari")
+	m2 := f("M-DATE-MISMATCH", claim.SourceResume, claim.SeverityBlocking, true)
+	m2.Evidence = ev("pulang 4 Juli 2026")
+	r1, r2 := f("R-CODE-FORMAT", claim.SourceRule, claim.SeverityMinor, true), f("R-CODE-FORMAT", claim.SourceRule, claim.SeverityMinor, true)
+
+	r := Assemble(claim.Case{}, []claim.Finding{r1, r2}, []claim.Finding{m1, m2}, false)
+
+	got := ids(r)
+	if len(got) != 3 || got[0] != "M-DATE-MISMATCH" {
+		t.Fatalf("want 1 merged model finding + 2 separate rule findings, got %v", got)
+	}
+	if len(r.Primary.Evidence) != 2 || r.Primary.Evidence[1].Quote != "pulang 4 Juli 2026" {
+		t.Fatalf("merged finding must carry both quotes, got %+v", r.Primary.Evidence)
+	}
+	if len(m1.Evidence) != 1 {
+		t.Fatalf("input finding must not be mutated (it may be cached), got %+v", m1.Evidence)
+	}
+}

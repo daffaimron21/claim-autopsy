@@ -1,6 +1,25 @@
-{"id":"case-02","title":"Appendicitis billed with a cardiac procedure code","cbg_code":"K-4-10-I",
-"diagnoses":[{"code":"K35.8","primary":true}],"procedures":[{"code":"36.06"}],
-"admit_date":"2026-03-10","discharge_date":"2026-03-13","care_class":3,
-"return_reason":"Dispute: tindakan tidak sesuai",
-"resume_text":"Pasien perempuan 24 tahun nyeri perut kanan bawah 2 hari. USG: apendisitis akut. Dilakukan apendektomi terbuka pada hari yang sama. Pulang hari ke-3 tanpa komplikasi.",
-"expected":["R-PROC-SUPPORT"]}
+{
+ "id": "case-02",
+ "title": "Appendicitis billed with a cardiac procedure code",
+ "cbg_code": "K-4-10-I",
+ "diagnoses": [
+  {
+   "code": "K35.8",
+   "primary": true
+  }
+ ],
+ "procedures": [
+  {
+   "code": "36.06"
+  }
+ ],
+ "admit_date": "2026-03-10",
+ "discharge_date": "2026-03-13",
+ "care_class": 3,
+ "return_reason": "Dispute: tindakan tidak sesuai",
+ "resume_text": "Pasien perempuan 24 tahun nyeri perut kanan bawah 2 hari. USG: apendisitis akut. Dilakukan apendektomi terbuka pada hari yang sama. Pulang hari ke-3 tanpa komplikasi.",
+ "expected": [
+  "R-PROC-SUPPORT",
+  "M-PROC-MISSING"
+ ]
+}

@@ -2,7 +2,7 @@
 
 Open the live app on `case-06` before recording. Run once beforehand so the page is warm.
 
-**Honesty check before recording:** the saved results are hand-written until you run `go run ./cmd/record-fixtures` with a real key, or deploy with `LIVE_MODEL=true`. If the on-screen notice says "saved results, not a live model call", do not say "the model found" in the video. Say "the discharge-summary reader reports".
+**Honesty check before recording:** the saved results were recorded from a real model run on 2026-11-11. For the video, deploy or run with `LIVE_MODEL=true` and a key so there is no "saved results" notice and the autopsy is a real call (the first call per case takes a few seconds, later calls are cached). If the notice is on screen, say "saved results" and not "live".
 
 | Time | Show | Say |
 |---|---|---|

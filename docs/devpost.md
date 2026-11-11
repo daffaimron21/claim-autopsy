@@ -38,7 +38,7 @@ TODO (owner): the Kiro section. Describe only what you really did in Kiro: specs
 
 ## Honest limits to state
 
-- Until fixtures are recorded from a real model or the app runs with a live key, the discharge-summary findings are saved, hand-written results. Say so.
-- The eval is a regression test, not an accuracy measurement.
+- The discharge-summary reader was run against 6 synthetic cases with `claude-haiku-5-5`; the saved results are those recordings. The app shows a notice when it serves saved results instead of a live call.
+- The eval is 6 hand-written cases: a regression test, not an accuracy measurement.
 - All data is synthetic. Rules are simplified for demo, not official.
 - Nothing is submitted to BPJS or SATUSEHAT.

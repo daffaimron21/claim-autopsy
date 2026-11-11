@@ -12,7 +12,7 @@ import (
 func Assemble(c claim.Case, ruleFindings, resumeFindings []claim.Finding, degraded bool) claim.Report {
 	all := make([]claim.Finding, 0, len(ruleFindings)+len(resumeFindings))
 	all = append(all, ruleFindings...)
-	all = append(all, resumeFindings...)
+	all = append(all, mergeResume(resumeFindings)...)
 	sort.SliceStable(all, func(i, j int) bool {
 		a, b := all[i], all[j]
 		if a.Severity != b.Severity {
@@ -37,4 +37,23 @@ func Assemble(c claim.Case, ruleFindings, resumeFindings []claim.Finding, degrad
 		}
 	}
 	return r
+}
+
+// mergeResume folds model findings that report the same rule into one finding with all the
+// evidence quotes. A model often says one root cause twice with different quotes; showing two
+// identical cards is noise. Rule findings are not merged: each carries its own params (e.g. a code).
+// It copies, so a cached input is never mutated.
+func mergeResume(in []claim.Finding) []claim.Finding {
+	out := make([]claim.Finding, 0, len(in))
+	idx := map[string]int{}
+	for _, f := range in {
+		if i, ok := idx[f.RuleID]; ok {
+			out[i].Evidence = append(out[i].Evidence, f.Evidence...)
+			continue
+		}
+		idx[f.RuleID] = len(out)
+		f.Evidence = append([]claim.Evidence(nil), f.Evidence...)
+		out = append(out, f)
+	}
+	return out
 }

@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "rule_id": "M-PROC-MISSING",
+    "source": "resume",
+    "severity": 1,
+    "message_key": "finding.resume.proc_missing",
+    "params": {
+      "procedure": "apendektomi terbuka"
+    },
+    "evidence": [
+      {
+        "field": "resume_text",
+        "quote": "Dilakukan apendektomi terbuka pada hari yang sama"
+      }
+    ],
+    "fix_key": "fix.code_missing_procedure",
+    "fixable": true
+  }
+]
