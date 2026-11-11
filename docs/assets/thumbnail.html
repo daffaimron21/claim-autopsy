@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Claim Autopsy thumbnail</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1500px; height: 1000px; overflow: hidden; }
+  body { background: #11131a; color: #e7e9ef; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background-image: linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+    background-size: 50px 50px; display: flex; align-items: center; padding: 0 70px; gap: 50px; }
+  .left { width: 600px; flex: none; }
+  .chip { display: inline-block; font-size: 26px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: #d68910; border: 3px solid #d68910; padding: 6px 18px; border-radius: 999px; margin-bottom: 36px; }
+  h1 { font-size: 160px; line-height: .95; letter-spacing: -.03em; font-weight: 800; }
+  h1 span { color: #c0392b; }
+  .tag { font-size: 44px; line-height: 1.25; color: #aab0c0; margin-top: 40px; }
+  .card { position: relative; flex: none; width: 690px; background: #f4eddc; color: #1f1c16; border-radius: 6px;
+    padding: 40px 44px 120px; transform: rotate(2deg); box-shadow: 0 6px 0 #d8cdb2, 0 40px 80px #000a; }
+  .card h2 { font-size: 30px; letter-spacing: .12em; text-transform: uppercase; border-bottom: 4px solid #1f1c16; padding-bottom: 14px; }
+  .stamp { position: absolute; right: 30px; bottom: 26px; transform: rotate(-5deg); font-size: 40px; font-weight: 900; letter-spacing: .06em;
+    text-transform: uppercase; color: #d68910; border: 8px solid #d68910; padding: 8px 22px; background: #f4eddcee; border-radius: 6px; }
+  .f { margin-top: 36px; background: #fffaf0; border: 2px solid #d8cdb2; border-left: 14px solid #c0392b; padding: 24px 28px; }
+  .f.major { border-left-color: #d68910; margin-top: 22px; }
+  .row { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+  .c { font-size: 20px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 14px; border-radius: 999px; background: #e8dfc7; }
+  .c.m { background: #dcd1f5; }
+  .id { font-family: ui-monospace, Menlo, monospace; font-size: 24px; color: #6b6350; }
+  .msg { font-size: 30px; font-weight: 700; line-height: 1.25; }
+  q { display: inline-block; margin-top: 14px; font-family: ui-monospace, Menlo, monospace; font-size: 28px; background: #f0e6c8; padding: 4px 12px; }
+</style></head>
+<body>
+  <div class="left">
+    <div class="chip">Kiroween 2026 · Frankenstein</div>
+    <h1>Claim<br><span>Autopsy</span></h1>
+    <p class="tag">Why did the claim come back? Rules find the cause. Every finding shows its evidence.</p>
+  </div>
+  <div class="card">
+    <h2>Autopsy report</h2>
+    <div class="stamp">Resubmit after fixing</div>
+    <div class="f">
+      <div class="row"><span class="c">Blocking</span><span class="c m">Model</span><span class="id">M-DATE-MISMATCH</span></div>
+      <p class="msg">The discharge summary disagrees with the claim on the discharge date.</p>
+      <q>pulang 4 Juli 2026</q>
+    </div>
+    <div class="f major">
+      <div class="row"><span class="c">Major</span><span class="c">Rule</span><span class="id">R-LOS</span></div>
+      <p class="msg">The stay lasted 9 days, but the group allows 1 to 5 days.</p>
+    </div>
+  </div>
+</body></html>
