@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Run rule tests on rule change",
+  "description": "When a rule or its data changes, run the rule engine tests and report failures.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["internal/rules/**/*.go", "internal/rules/ruledata/*.json"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A rule or rule data file changed. Run `go test ./internal/rules/...` and report any failing test with the rule ID involved."
+  }
+}

@@ -1,0 +1,7 @@
+# NOTE: never ignore .kiro/ (Kiroween requirement)
+bin/
+web/node_modules/
+web/dist/
+.env
+*.log
+.DS_Store
