@@ -30,14 +30,21 @@ async function guarded(fn: () => Promise<void>) {
 async function select(id: string) {
   selectedId.value = id
   report.value = null
-  await guarded(async () => { detail.value = await getCase(id) })
+  detail.value = null
+  await guarded(async () => {
+    const d = await getCase(id)
+    if (selectedId.value === id) detail.value = d
+  })
 }
 
 async function run() {
   if (!selectedId.value || running.value) return
   running.value = true
   const id = selectedId.value
-  await guarded(async () => { report.value = await runAutopsy(id) })
+  await guarded(async () => {
+    const r = await runAutopsy(id)
+    if (selectedId.value === id) report.value = r // drop a result for a case the user already left
+  })
   running.value = false
 }
 

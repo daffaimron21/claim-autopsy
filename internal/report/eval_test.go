@@ -22,7 +22,7 @@ func TestEval_AllSyntheticCasesRecoverExpectedRootCauses(t *testing.T) {
 	reader := resume.Verified(resume.NewFixture(os.DirFS("../../testdata/resume_fixtures")))
 	wantPrimary := map[string]string{
 		"case-01": "R-LOS", "case-02": "R-PROC-SUPPORT", "case-03": "R-PRIMARY-DX",
-		"case-04": "R-DATES", "case-05": "M-UNCODED-DX", "case-06": "M-DATE-MISMATCH",
+		"case-04": "R-DATES", "case-05": "M-PROC-MISSING", "case-06": "M-DATE-MISMATCH",
 	}
 	for _, c := range cases {
 		res, err := reader.Read(context.Background(), c)

@@ -4,8 +4,15 @@
     "tagline": "Find out why a BPJS claim came back.",
     "synthetic": "All data is synthetic. Rules are a simplified subset for demo, not official BPJS rules."
   },
-  "locale": { "label": "Language", "en": "EN", "id": "ID" },
-  "cases": { "heading": "Returned claims", "loading": "Loading claims" },
+  "locale": {
+    "label": "Language",
+    "en": "EN",
+    "id": "ID"
+  },
+  "cases": {
+    "heading": "Returned claims",
+    "loading": "Loading claims"
+  },
   "file": {
     "heading": "Case file",
     "cbg": "INA-CBG group",
@@ -20,7 +27,10 @@
     "summary": "Discharge summary",
     "summaryNote": "Original text, in Indonesian"
   },
-  "autopsy": { "run": "Run autopsy", "running": "Examining the claim" },
+  "autopsy": {
+    "run": "Run autopsy",
+    "running": "Examining the claim"
+  },
   "report": {
     "heading": "Autopsy report",
     "empty": "Pick a returned claim, then run the autopsy.",
@@ -29,9 +39,10 @@
     "verdict": "Verdict",
     "fix": "Suggested fix",
     "evidence": "Evidence",
-    "degraded": "The live model was unavailable. This report uses saved model results.",
+    "degraded": "The live model was unavailable. The discharge-summary findings use saved results.",
     "noCause": "No cause found. The claim passed every check.",
-    "print": "Print or save as PDF"
+    "print": "Print or save as PDF",
+    "saved": "The discharge-summary findings shown here are saved results, not a live model call."
   },
   "drawer": {
     "show": "Why this finding?",
@@ -40,8 +51,15 @@
     "deterministic": "Deterministic rule. The same input always gives the same result.",
     "modelNote": "Found by the language model. Its quote was checked against the summary word for word."
   },
-  "severity": { "minor": "Minor", "major": "Major", "blocking": "Blocking" },
-  "source": { "rule": "Rule", "resume": "Model" },
+  "severity": {
+    "minor": "Minor",
+    "major": "Major",
+    "blocking": "Blocking"
+  },
+  "source": {
+    "rule": "Rule",
+    "resume": "Model"
+  },
   "verdict": {
     "resubmit_as_is": "Can be resubmitted as is",
     "resubmit_after_fix": "Resubmit after fixing",
@@ -56,25 +74,59 @@
     "resume_text": "Discharge summary"
   },
   "rule": {
-    "R_LOS": { "title": "Length of stay in group range", "desc": "Counts the days between admit and discharge and compares them with the range allowed for the INA-CBG group. A same-day stay counts as 1 day." },
-    "R_DATES": { "title": "Valid admit and discharge dates", "desc": "Checks that both dates are real dates and that discharge is not before admit." },
-    "R_PRIMARY_DX": { "title": "Primary diagnosis fits the group", "desc": "Checks that the primary diagnosis code belongs to the diagnoses the INA-CBG group covers, and that the group code is known." },
-    "R_PROC_SUPPORT": { "title": "Procedure has a supporting diagnosis", "desc": "Checks that a coded procedure is backed by at least one diagnosis on the claim that justifies it." },
-    "R_CODE_FORMAT": { "title": "Code format", "desc": "Checks that diagnosis and procedure codes have the shape of ICD-10 and ICD-9-CM codes." },
-    "M_UNCODED_DX": { "title": "Diagnosis in the summary but not coded", "desc": "The language model looks for a diagnosis the discharge summary states that the claim does not code." },
-    "M_DATE_MISMATCH": { "title": "Summary disagrees on dates", "desc": "The language model looks for a stay length or discharge date in the summary that disagrees with the claim." },
-    "M_PROC_MISSING": { "title": "Procedure in the summary but not coded", "desc": "The language model looks for a procedure the summary describes that the claim does not code." }
+    "R_LOS": {
+      "title": "Length of stay in group range",
+      "desc": "Counts the days between admit and discharge and compares them with the range allowed for the INA-CBG group. A same-day stay counts as 1 day."
+    },
+    "R_DATES": {
+      "title": "Valid admit and discharge dates",
+      "desc": "Checks that both dates are real dates and that discharge is not before admit."
+    },
+    "R_PRIMARY_DX": {
+      "title": "Primary diagnosis fits the group",
+      "desc": "Checks that the primary diagnosis code belongs to the diagnoses the INA-CBG group covers, and that the group code is known."
+    },
+    "R_PROC_SUPPORT": {
+      "title": "Procedure has a supporting diagnosis",
+      "desc": "Checks that a coded procedure is backed by at least one diagnosis on the claim that justifies it."
+    },
+    "R_CODE_FORMAT": {
+      "title": "Code format",
+      "desc": "Checks that diagnosis and procedure codes have the shape of ICD-10 and ICD-9-CM codes."
+    },
+    "M_UNCODED_DX": {
+      "title": "Diagnosis in the summary but not coded",
+      "desc": "The language model looks for a diagnosis the discharge summary states that the claim does not code."
+    },
+    "M_DATE_MISMATCH": {
+      "title": "Summary disagrees on dates",
+      "desc": "The language model looks for a stay length or discharge date in the summary that disagrees with the claim."
+    },
+    "M_PROC_MISSING": {
+      "title": "Procedure in the summary but not coded",
+      "desc": "The language model looks for a procedure the summary describes that the claim does not code."
+    }
   },
   "finding": {
     "dates": {
       "inverted": "The discharge date ({discharge}) is before the admit date ({admit}).",
       "invalid": "The admit or discharge date is missing or is not a valid date."
     },
-    "los": { "out_of_range": "The stay lasted {los} days, but the {group} group allows {min} to {max} days." },
-    "cbg": { "unknown": "The INA-CBG code {cbg} is not in the rule data." },
-    "primary_dx": { "not_in_group": "The primary diagnosis {code} does not belong to the {group} group ({cbg})." },
-    "procedure": { "unsupported": "The procedure {procedure} ({label}) has no supporting diagnosis on the claim." },
-    "code": { "format": "The code {code} does not look like a valid code." },
+    "los": {
+      "out_of_range": "The stay lasted {los} days, but the {group} group allows {min} to {max} days."
+    },
+    "cbg": {
+      "unknown": "The INA-CBG code {cbg} is not in the rule data."
+    },
+    "primary_dx": {
+      "not_in_group": "The primary diagnosis {code} does not belong to the {group} group ({cbg})."
+    },
+    "procedure": {
+      "unsupported": "The procedure {procedure} ({label}) has no supporting diagnosis on the claim."
+    },
+    "code": {
+      "format": "The code {code} does not look like a valid code."
+    },
     "resume": {
       "uncoded_dx": "The discharge summary states a diagnosis that is not coded on the claim.",
       "date_mismatch": "The discharge summary disagrees with the claim on the length of stay or the discharge date.",

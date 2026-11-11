@@ -17,7 +17,10 @@ Three parts stitched together:
 - **All data is synthetic.** No real patient data, no BPJS or SATUSEHAT credentials.
 - **Rules are a simplified subset for demo.** `internal/rules/ruledata/*.json` is designed for this demo and is not an official tariff table or BPJS rule set.
 - This is a demo, not a claims system. It does not submit anything anywhere.
-- The saved model results in `testdata/resume_fixtures/` are currently hand-written. `go run ./cmd/record-fixtures` (needs `ANTHROPIC_API_KEY`) replaces them with real model output.
+- The saved results in `testdata/resume_fixtures/` are currently **hand-written, not recorded from a model**, and the app says so on screen ("saved results, not a live model call"). `go run ./cmd/record-fixtures` (needs `ANTHROPIC_API_KEY`) replaces them with real model output.
+
+- The eval test (`internal/report/eval_test.go`) checks the saved results against hand-written expectations. It is a regression test, **not a measurement of model accuracy**.
+- Only two of the three verdicts can currently occur, because every finding is fixable.
 
 ## Run it
 
@@ -41,7 +44,7 @@ docker run -p 8080:8080 claim-autopsy
 | `LIVE_MODEL_NAME` | Default `claude-haiku-5-5` |
 | `WEB_DIR` | Built web app, default `web/dist` |
 
-If the live model fails, times out, or the rate limit is hit, the report is still returned from saved results and marked as degraded.
+If the live model fails, times out, has no key, or the rate limit is hit, the report is still returned from saved results and marked as degraded. A successful live result is cached per case, so the paid model is called at most once per case per process.
 
 ## License
 

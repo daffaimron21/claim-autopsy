@@ -2,5 +2,9 @@
   {"rule_id":"M-UNCODED-DX","source":"resume","severity":1,"message_key":"finding.resume.uncoded_dx",
    "params":{"diagnosis":"acute kidney injury"},
    "evidence":[{"field":"resume_text","quote":"diagnosis cedera ginjal akut ditegakkan"}],
-   "fix_key":"fix.add_missing_dx","fixable":true}
+   "fix_key":"fix.add_missing_dx","fixable":true},
+  {"rule_id":"M-PROC-MISSING","source":"resume","severity":1,"message_key":"finding.resume.proc_missing",
+   "params":{"procedure":"hemodialysis"},
+   "evidence":[{"field":"resume_text","quote":"Dilakukan hemodialisis 2 kali"}],
+   "fix_key":"fix.code_missing_procedure","fixable":true}
 ]

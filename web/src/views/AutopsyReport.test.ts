@@ -8,6 +8,7 @@ const report: Report = {
   case_id: 'case-06',
   verdict: 'resubmit_after_fix',
   degraded: false,
+  saved: false,
   primary: {
     rule_id: 'R-LOS', source: 'rule', severity: 1, message_key: 'finding.los.out_of_range',
     params: { los: '14', min: '2', max: '8', group: 'Pneumonia' },
@@ -41,8 +42,16 @@ describe('AutopsyReport', () => {
     expect(render({ ...report, degraded: true }).find('[data-test="degraded"]').exists()).toBe(true)
   })
 
+  it('shows the saved notice for saved-only results, but not twice when degraded', () => {
+    expect(render({ ...report, saved: true }).find('[data-test="saved"]').text()).toContain('saved results')
+    expect(render(report).find('[data-test="saved"]').exists()).toBe(false)
+    const w = render({ ...report, saved: true, degraded: true })
+    expect(w.find('[data-test="degraded"]').exists()).toBe(true)
+    expect(w.find('[data-test="saved"]').exists()).toBe(false)
+  })
+
   it('handles a clean claim with no primary cause', () => {
-    const w = render({ case_id: 'x', primary: null, secondary: [], verdict: 'resubmit_as_is', degraded: false })
+    const w = render({ case_id: 'x', primary: null, secondary: [], verdict: 'resubmit_as_is', degraded: false, saved: false })
     expect(w.find('[data-test="no-cause"]').text()).toContain('No cause found')
     expect(w.text()).toContain('Can be resubmitted as is')
   })

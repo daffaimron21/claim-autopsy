@@ -1,6 +1,21 @@
-{"id":"case-04","title":"Dates reversed and a malformed diagnosis code","cbg_code":"J-4-10-I",
-"diagnoses":[{"code":"J189","primary":true}],"procedures":[],
-"admit_date":"2026-05-20","discharge_date":"2026-05-15","care_class":3,
-"return_reason":"Pending: data tidak valid",
-"resume_text":"Pasien anak 6 tahun batuk dan demam 4 hari. Didiagnosis pneumonia, diberikan antibiotik. Dirawat 4 hari, pulang dalam kondisi membaik.",
-"expected":["R-DATES","R-CODE-FORMAT"]}
+{
+ "id": "case-04",
+ "title": "Dates reversed and a malformed diagnosis code",
+ "cbg_code": "J-4-10-I",
+ "diagnoses": [
+  {
+   "code": "J189",
+   "primary": true
+  }
+ ],
+ "procedures": [],
+ "admit_date": "2026-05-20",
+ "discharge_date": "2026-05-15",
+ "care_class": 3,
+ "return_reason": "Pending: data tidak valid",
+ "resume_text": "Pasien anak 6 tahun batuk dan demam 4 hari. Didiagnosis pneumonia, diberikan antibiotik. Pulang dalam kondisi membaik.",
+ "expected": [
+  "R-DATES",
+  "R-CODE-FORMAT"
+ ]
+}

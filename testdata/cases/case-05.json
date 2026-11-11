@@ -1,6 +1,21 @@
-{"id":"case-05","title":"Kidney injury and dialysis never coded","cbg_code":"E-4-10-I",
-"diagnoses":[{"code":"E11.9","primary":true}],"procedures":[],
-"admit_date":"2026-06-01","discharge_date":"2026-06-06","care_class":1,
-"return_reason":"Dispute: tingkat keparahan tidak sesuai dengan sumber daya yang digunakan",
-"resume_text":"Pasien perempuan 67 tahun dengan DM tipe 2 tidak terkontrol, gula darah 480. Selama perawatan kreatinin naik dari 1,1 menjadi 3,4 dan diagnosis cedera ginjal akut ditegakkan. Dilakukan hemodialisis 2 kali. Gula darah terkontrol, pulang hari ke-5.",
-"expected":["M-UNCODED-DX"]}
+{
+ "id": "case-05",
+ "title": "Kidney injury and dialysis never coded",
+ "cbg_code": "E-4-10-I",
+ "diagnoses": [
+  {
+   "code": "E11.9",
+   "primary": true
+  }
+ ],
+ "procedures": [],
+ "admit_date": "2026-06-01",
+ "discharge_date": "2026-06-06",
+ "care_class": 1,
+ "return_reason": "Dispute: tingkat keparahan tidak sesuai dengan sumber daya yang digunakan",
+ "resume_text": "Pasien perempuan 67 tahun dengan DM tipe 2 tidak terkontrol, gula darah 480. Selama perawatan kreatinin naik dari 1,1 menjadi 3,4 dan diagnosis cedera ginjal akut ditegakkan. Dilakukan hemodialisis 2 kali. Gula darah terkontrol, pulang hari ke-5.",
+ "expected": [
+  "M-UNCODED-DX",
+  "M-PROC-MISSING"
+ ]
+}

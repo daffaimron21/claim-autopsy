@@ -72,4 +72,6 @@ type Report struct {
 	Secondary []Finding `json:"secondary"`
 	Verdict   Verdict   `json:"verdict"`
 	Degraded  bool      `json:"degraded"`
+	// Saved is true when the discharge-summary findings came from saved results, not a live model call.
+	Saved bool `json:"saved"`
 }

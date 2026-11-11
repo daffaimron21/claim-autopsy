@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"sync"
 
 	"golang.org/x/time/rate"
 
@@ -32,12 +33,15 @@ type handler struct {
 	live    resume.Reader // nil when the live model is off
 	saved   resume.Reader
 	limiter *rate.Limiter // nil means unlimited
+
+	mu    sync.Mutex
+	cache map[string]resume.Result // first successful live result per case: caps paid calls at one per case
 }
 
 // NewHandler wires the API. live may be nil (saved results only). When live is set,
 // a denied limiter or a failing model falls back to saved and marks the report degraded.
 func NewHandler(cases []claim.Case, live, saved resume.Reader, limiter *rate.Limiter) http.Handler {
-	h := &handler{cases, live, saved, limiter}
+	h := &handler{cases: cases, live: live, saved: saved, limiter: limiter, cache: map[string]resume.Result{}}
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /api/cases", h.list)
 	mux.HandleFunc("GET /api/cases/{id}", h.get)
@@ -79,19 +83,45 @@ func (h *handler) autopsy(w http.ResponseWriter, r *http.Request) {
 		writeErr(w, http.StatusNotFound, "error.case_not_found")
 		return
 	}
-	reader, limited := h.saved, false
-	if h.live != nil {
-		if h.limiter == nil || h.limiter.Allow() {
-			reader = resume.NewFallback(h.live, h.saved)
-		} else {
-			limited = true
-		}
-	}
-	res, err := reader.Read(r.Context(), c)
+	res, usedSaved, err := h.read(r, c)
 	if err != nil {
 		log.Printf("autopsy %s: %v", c.ID, err)
 		writeErr(w, http.StatusInternalServerError, "error.autopsy_failed")
 		return
 	}
-	writeJSON(w, http.StatusOK, report.Assemble(c, rules.Run(c), res.Findings, res.Degraded || limited))
+	rep := report.Assemble(c, rules.Run(c), res.Findings, res.Degraded)
+	rep.Saved = usedSaved
+	writeJSON(w, http.StatusOK, rep)
+}
+
+// read returns the resume findings and whether they came from saved results.
+// Order: no live model -> saved; cached live result -> cached; limiter denies -> saved (degraded);
+// otherwise live with saved as fallback. Only a successful live result is cached.
+func (h *handler) read(r *http.Request, c claim.Case) (res resume.Result, usedSaved bool, err error) {
+	if h.live == nil {
+		res, err = h.saved.Read(r.Context(), c)
+		return res, true, err
+	}
+	h.mu.Lock()
+	cached, ok := h.cache[c.ID]
+	h.mu.Unlock()
+	if ok {
+		return cached, false, nil
+	}
+	if h.limiter != nil && !h.limiter.Allow() {
+		res, err = h.saved.Read(r.Context(), c)
+		res.Degraded = true
+		return res, true, err
+	}
+	res, err = resume.NewFallback(h.live, h.saved).Read(r.Context(), c)
+	if err != nil {
+		return res, res.Degraded, err
+	}
+	if res.Degraded {
+		return res, true, nil
+	}
+	h.mu.Lock()
+	h.cache[c.ID] = res
+	h.mu.Unlock()
+	return res, false, nil
 }

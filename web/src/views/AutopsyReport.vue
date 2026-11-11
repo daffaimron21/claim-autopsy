@@ -20,6 +20,8 @@ const print = () => window.print()
 
     <p v-if="report.degraded" class="notice" data-test="degraded" role="status">{{ t('report.degraded') }}</p>
 
+    <p v-else-if="report.saved" class="notice" data-test="saved" role="status">{{ t('report.saved') }}</p>
+
     <div class="verdict-row">
       <span class="label">{{ t('report.verdict') }}</span>
       <span class="stamp" :class="report.verdict" data-test="verdict">{{ t(`verdict.${report.verdict}`) }}</span>

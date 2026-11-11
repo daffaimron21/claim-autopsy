@@ -131,3 +131,51 @@ func TestAutopsy_AllReadersFail_500(t *testing.T) {
 		t.Fatalf("code=%d body=%s", rec.Code, rec.Body.String())
 	}
 }
+
+func TestAutopsy_SavedOnlyMode_MarksSavedNotDegraded(t *testing.T) {
+	r := decodeReport(t, do(setup(t, nil, nil, nil), "POST", "/api/cases/case-05/autopsy"))
+	if !r.Saved || r.Degraded {
+		t.Fatalf("saved-only mode must be saved=true degraded=false, got %+v", r)
+	}
+}
+
+func TestAutopsy_LiveSuccess_NotSaved(t *testing.T) {
+	var calls int32
+	r := decodeReport(t, do(setup(t, liveFake{calls: &calls}, nil, nil), "POST", "/api/cases/case-01/autopsy"))
+	if r.Saved || r.Degraded {
+		t.Fatalf("live success must be saved=false degraded=false, got %+v", r)
+	}
+}
+
+func TestAutopsy_ModelDown_MarksSaved(t *testing.T) {
+	var calls int32
+	r := decodeReport(t, do(setup(t, liveFake{calls: &calls, err: errors.New("down")}, nil, nil), "POST", "/api/cases/case-06/autopsy"))
+	if !r.Saved || !r.Degraded {
+		t.Fatalf("fallback must be saved=true degraded=true, got %+v", r)
+	}
+}
+
+func TestAutopsy_LiveResultCachedPerCase(t *testing.T) {
+	var calls int32
+	h := setup(t, liveFake{calls: &calls}, nil, nil)
+	for i := 0; i < 3; i++ {
+		do(h, "POST", "/api/cases/case-01/autopsy")
+	}
+	if calls != 1 {
+		t.Fatalf("same case must reach the paid model once, got %d calls", calls)
+	}
+	do(h, "POST", "/api/cases/case-02/autopsy")
+	if calls != 2 {
+		t.Fatalf("a different case is a new call, want 2 got %d", calls)
+	}
+}
+
+func TestAutopsy_FallbackResultNotCached(t *testing.T) {
+	var calls int32
+	h := setup(t, liveFake{calls: &calls, err: errors.New("down")}, nil, nil)
+	do(h, "POST", "/api/cases/case-01/autopsy")
+	do(h, "POST", "/api/cases/case-01/autopsy")
+	if calls != 2 {
+		t.Fatalf("a failed live call must be retried, want 2 calls got %d", calls)
+	}
+}

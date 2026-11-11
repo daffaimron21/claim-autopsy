@@ -18,6 +18,8 @@ export interface Report {
   secondary: Finding[]
   verdict: Verdict
   degraded: boolean
+  /** true when the discharge-summary findings are saved results, not a live model call */
+  saved: boolean
 }
 export interface CaseItem { id: string; title: string }
 export interface CaseDetail extends CaseItem {

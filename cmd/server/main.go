@@ -29,9 +29,8 @@ func main() {
 	}
 	saved := resume.Verified(resume.NewFixture(fixFS))
 
-	var live resume.Reader
-	if os.Getenv("LIVE_MODEL") == "true" && os.Getenv("ANTHROPIC_API_KEY") != "" {
-		live = resume.Verified(resume.NewAnthropic(os.Getenv("ANTHROPIC_API_KEY"), env("LIVE_MODEL_NAME", "claude-haiku-5-5"), http.DefaultClient))
+	live := newLive(os.Getenv, http.DefaultClient)
+	if live != nil {
 		log.Println("live model: on")
 	} else {
 		log.Println("live model: off (saved results only)")
@@ -45,6 +44,19 @@ func main() {
 	srv := &http.Server{Addr: ":" + env("PORT", "8080"), Handler: mux, ReadHeaderTimeout: 5 * time.Second}
 	log.Println("listening on", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
+}
+
+// newLive returns the live resume reader, or nil unless LIVE_MODEL=true. With LIVE_MODEL=true and no key
+// it is still built: every read fails, so reports are served from saved results and marked degraded.
+func newLive(getenv func(string) string, client *http.Client) resume.Reader {
+	if getenv("LIVE_MODEL") != "true" {
+		return nil
+	}
+	model := getenv("LIVE_MODEL_NAME")
+	if model == "" {
+		model = "claude-haiku-5-5"
+	}
+	return resume.Verified(resume.NewAnthropic(getenv("ANTHROPIC_API_KEY"), model, client))
 }
 
 func dirExists(p string) bool { st, err := os.Stat(p); return err == nil && st.IsDir() }
